@@ -1,0 +1,74 @@
+/* Sidebar Container */
+.sidebarad {
+    width: 260px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0; /* Changed from left to right */
+    background: rgba(251, 247, 247, 0.1); /* Glassmorphism Effect */
+    backdrop-filter: blur(12px);
+    border-left: 2px solid rgba(255, 255, 255, 0.2); /* Left border instead of right */
+    box-shadow: -4px 0 10px rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Sidebar Heading */
+  .sidebarad h2 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  
+  /* Sidebar Navigation */
+  .sidebarad ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  /* Sidebar Links */
+  .sidebarad ul li {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .sidebarad ul li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 15px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .sidebarad ul li a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #FDCB58;
+    transform: translateX(-5px); /* Shift left instead of right */
+  }
+  
+  /* Sidebar Active Link */
+  .sidebarad ul li a.active {
+    background: linear-gradient(45deg, #0077B6, #00C896);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0px 4px 10px rgba(0, 119, 182, 0.5);
+  }
+  
+  /* Sidebar Icons */
+  .sidebarad ul li a::before {
+    margin-right: 10px;
+    font-size: 18px;
+  }
+  

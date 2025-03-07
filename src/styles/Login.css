@@ -1,0 +1,426 @@
+/* 🌟 Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* 🔵 Body Styling */
+  body {
+    background: linear-gradient(45deg, #121212, #1E1E2E, #00A8E8);
+    background-size: 300% 300%;
+    animation: gradientShift 12s infinite ease-in-out;
+    color: white;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* 🌟 Sidebar Styling */
+  .sidebar {
+    width: 350px;
+    height: 100vh;
+    background: url('https://source.unsplash.com/500x1000/?dark,city') no-repeat center center/cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.4s ease-in-out;
+    box-shadow: 5px 0 20px rgba(0, 168, 232, 0.5);
+    backdrop-filter: blur(15px);
+    border-right: 2px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* 🌟 Sidebar Hover Effect */
+  .sidebar:hover {
+    box-shadow: 5px 0 30px rgba(0, 168, 232, 0.6);
+  }
+  
+  /* 🌟 Sidebar Navigation */
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+  
+  .google-login {
+    border: 2px solid rgba(255, 255, 255, 0.7); /* Semi-transparent white border */
+    border-radius: 12px; /* Smooth rounded corners */
+    padding: 12px 20px; /* Balanced padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1E1E2E, #00A8E8);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0px 4px 10px rgba(0, 168, 232, 0.3);
+    outline: none;
+    width: 100%;
+    max-width: 300px;
+}
+
+.google-login:hover {
+    box-shadow: 0px 0px 18px rgba(0, 168, 232, 0.6);
+    transform: translateY(-2px) scale(1.05);
+    border-color: rgba(255, 255, 255, 1);
+}
+
+.google-login:active {
+    transform: translateY(0px) scale(1);
+    box-shadow: 0px 2px 8px rgba(0, 168, 232, 0.5);
+}
+
+/* Adding a subtle glow animation */
+@keyframes glow {
+    0% {
+        box-shadow: 0px 0px 12px rgba(0, 168, 232, 0.5);
+    }
+    100% {
+        box-shadow: 0px 0px 20px rgba(0, 168, 232, 0.8);
+    }
+}
+
+/* Apply glow animation on focus */
+.google-login:focus {
+    animation: glow 1.5s infinite alternate;
+}
+
+  .sidebar ul li {
+    margin: 20px 0;
+  }
+  
+  .sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    transition: background 0.3s, transform 0.3s;
+  }
+  
+  .sidebar ul li a:hover {
+    background: rgba(0, 168, 232, 0.6);
+    transform: scale(1.05);
+  }
+  
+  /* 🌟 Main Content Container */
+  .container {
+    max-width: 800px;
+    padding: 40px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    box-shadow: 0px 4px 15px rgba(0, 168, 232, 0.3);
+    margin-left: 400px; /* Space from sidebar */
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  /* 🌟 Title Styling */
+  .container h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #FDCB58;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0px 0px 15px rgba(253, 203, 88, 0.7);
+    animation: glowEffect 2s infinite alternate;
+  }
+  
+  /* 🌟 Text Content */
+  .container p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 20px;
+  }
+  
+  /* 🔥 Buttons */
+  .button {
+    display: inline-block;
+    background-color: #FF6F61;
+    color: white;
+    border: none;
+    padding: 14px 22px;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .button:hover {
+    background-color: #FDCB58;
+    box-shadow: 0px 4px 20px rgba(255, 111, 97, 0.4);
+    transform: translateY(-2px);
+  }
+  
+  /* 🌟 Card Layout */
+  .card {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0px 4px 15px rgba(0, 168, 232, 0.3);
+    animation: fadeInUp 1.5s ease-in-out;
+  }
+  
+  .card h2 {
+    color: #00A8E8;
+    font-size: 24px;
+    text-shadow: 0px 0px 10px rgba(0, 168, 232, 0.7);
+  }
+  
+  /* 🔥 Image Gallery */
+  .image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .image-gallery img {
+    width: 180px;
+    height: 120px;
+    margin: 10px;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .image-gallery img:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+  }
+  
+  /* 🌟 Glow Effect */
+  @keyframes glowEffect {
+    0% {
+      text-shadow: 0px 0px 12px #00A8E8, 0px 0px 24px #00C896;
+    }
+    100% {
+      text-shadow: 0px 0px 20px #00A8E8, 0px 0px 35px #00C896;
+    }
+  }
+  
+  /* 🔥 Fade In Effect */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* 🔥 Fade In Up Effect */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* 🔥 Gradient Animation */
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* 📱 Responsive Sidebar */
+  @media (max-width: 1024px) {
+    .sidebar {
+      width: 280px;
+    }
+    .container {
+      margin-left: 300px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 220px;
+    }
+    .container {
+      margin-left: 240px;
+    }
+    .sidebar ul li a {
+      font-size: 16px;
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .sidebar {
+      width: 180px;
+    }
+    .container {
+      margin-left: 200px;
+    }
+    .container h1 {
+      font-size: 28px;
+    }
+  }
+
+  /* 🌟 Centered Box Container */
+  .login-container {
+    width: 400px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.15); /* Increased opacity for better visibility */
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    box-shadow: 0px 10px 30px rgba(0, 168, 232, 0.4);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.3s ease-in-out;
+}
+
+.login-container:hover {
+    box-shadow: 0px 15px 40px rgba(0, 168, 232, 0.6);
+}
+
+/* Text Enhancements */
+.login-container h1, .login-container p {
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* 🌟 Title Styling */
+.login-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+/* 🌟 Input Fields */
+.login-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 16px;
+    outline: none;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.login-container input:focus {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 0px 10px rgba(0, 168, 232, 0.6);
+}
+
+
+/* 🔒 Password Visibility Toggle */
+.password-container {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 12px;
+    width: 100%;
+}
+
+.password-container input {
+    border: none;
+    flex-grow: 1;
+    background: transparent;
+    color: white;
+}
+
+.password-container button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* 🌟 Sign-in Button */
+.login-container .btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: linear-gradient(135deg, #00A8E8, #0077B6);
+    color: white;
+    box-shadow: 0px 4px 8px rgba(0, 168, 232, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.login-container .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 10px 20px rgba(0, 168, 232, 0.6);
+}
+
+
+/* 🌟 Forgot Password */
+.forgot-password {
+    color: #fff;
+    font-size: 14px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 500px) {
+    .login-container {
+        width: 90%;
+        padding: 30px;
+    }
+
+    .login-container h1 {
+        font-size: 20px;
+    }
+
+    .login-container input {
+        font-size: 14px;
+    }
+}
+@media (max-width: 600px) {
+    .sidebar {
+        width: 80px;
+        padding: 10px;
+    }
+    .sidebar ul {
+        display: none; /* Hide menu items for a cleaner look */
+    }
+}
+
+
+  
