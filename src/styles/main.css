@@ -121,5 +121,31 @@ button:active {
   background-color: #1E1E2E;
   color: white;
   text-align: center;
-  padding: 15px;
+  padding: 30px 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer a {
+  color: #00C896;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #0077B6;
+}
+
+.footer .social-icons {
+  margin: 15px 0;
+}
+
+.footer .social-icons a {
+  margin: 0 10px;
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 20px 10px;
+  }
 }

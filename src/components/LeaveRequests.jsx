@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import "../styles/AdminDashboard.css"; // Optional styling
 
 const LeaveRequests = () => {
+  const [filter, setFilter] = useState('all');
   const [leaveRequests, setLeaveRequests] = useState([
     { id: 1, employee: "John Doe", type: "Sick Leave", status: "Pending" },
     { id: 2, employee: "Jane Smith", type: "Casual Leave", status: "Pending" },
@@ -16,9 +17,23 @@ const LeaveRequests = () => {
     );
   };
 
+  const filteredRequests = useMemo(() => 
+    filter === 'all' 
+      ? leaveRequests 
+      : leaveRequests.filter(req => req.status.toLowerCase() === filter)
+  , [leaveRequests, filter]);
+
   return (
     <div className="leave-requests">
       <h2>Leave Requests</h2>
+      <div className="filters">
+        <select onChange={(e) => setFilter(e.target.value)}>
+          <option value="all">All Requests</option>
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
+        </select>
+      </div>
       <table>
         <thead>
           <tr>
@@ -29,7 +44,7 @@ const LeaveRequests = () => {
           </tr>
         </thead>
         <tbody>
-          {leaveRequests.map(({ id, employee, type, status }) => (
+          {filteredRequests.map(({ id, employee, type, status }) => (
             <tr key={id}>
               <td>{employee}</td>
               <td>{type}</td>
