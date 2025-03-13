@@ -1,12 +1,12 @@
-import React, { Suspense, lazy } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { Suspense, lazy, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
 // Lazy-loaded pages
 const Login = lazy(() => import("./pages/Login"));
-const Logout = lazy(() => import("./pages/Logout"));
 const EmployeeDashboard = lazy(() => import("./pages/EmployeeDashboard"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const Home = lazy(() => import("./pages/Home"));
 
 // Employee Pages
 const EmployeeProfile = lazy(() => import("./components/EmployeeProfile"));
@@ -30,15 +30,28 @@ const PayrollManagement = lazy(() => import("./components/PayrollManagement"));
 const SettingsPermissions = lazy(() => import("./components/SettingsPermissions"));
 const ShiftScheduling = lazy(() => import("./components/ShiftScheduling"));
 const LeaveRequests = lazy(() => import("./components/LeaveRequests"));
+const AdminProfile = lazy(() => import("./components/AdminProfile"));
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <Suspense fallback={<div className="loading">Loading...</div>}>
         <Routes>
           {/* Public Routes */}
-          <Route path="/" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+         
 
           {/* Employee Routes */}
           <Route path="/employee" element={<EmployeeDashboard />}>
@@ -58,9 +71,13 @@ const App = () => {
 
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminDashboard />}>
-            <Route index element={<ReportsAnalytics />} />
+            <Route index element={<AdminProfile />} />
+            <Route path="reportAnalysis" element={<ReportsAnalytics />} />
+          
+
             <Route path="attendance-logs" element={<AttendanceLogs />} />
             <Route path="geofence-management" element={<GeofenceManagement />} />
+
             <Route path="payroll-management" element={<PayrollManagement />} />
             <Route path="employee-management" element={<EmployeeManagement />} />
             <Route path="notifications" element={<Notifications />} />

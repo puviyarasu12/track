@@ -1,81 +1,54 @@
 .dashboard-container {
-    display: flex;
-  }
-  
-  .dashboard-main {
-    flex-grow: 1;
-    padding: 20px;
-  }
-  
-  .dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #1e1e2d;
-    padding: 15px;
-    border-radius: 10px;
-  }
-  
-  .profile-section .profile-pic {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-  }
-  
-  .profile-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .profile-modal {
-    background: #2a2a3a;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-  }
-  
-  .close-btn {
-    cursor: pointer;
-    font-size: 24px;
-    color: red;
-    float: right;
-  }
-  /* Fullscreen Dark Overlay */
-.admin-profile {
+  display: flex;
+}
+
+.dashboard-main {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1e1e2d;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.profile-section .profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Modal Overlay */
+.profile-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 9999;
 }
 
-/* Profile Card */
-.profile-card {
-  background: rgba(38, 38, 38, 0.95);
-  padding: 30px;
-  border-radius: 20px;
-  width: 350px;
+/* Profile Modal */
+.profile-modal {
+  background: #2a2a3a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 320px;
   text-align: center;
-  position: relative;
-  box-shadow: 0 8px 32px rgba(0, 168, 232, 0.3);
+  box-shadow: 0 0 20px rgba(0, 168, 232, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.2);
   z-index: 10000;
   transform: translateY(20px);
   animation: slideUp 0.5s ease forwards;
-  transform-style: preserve-3d;
-  perspective: 1000px;
 }
 
 @keyframes slideUp {
@@ -93,6 +66,11 @@
   font-size: 18px;
   cursor: pointer;
   color: #ff5a5a;
+  transition: color 0.3s;
+}
+
+.close-btn:hover {
+  color: #ff0000;
 }
 
 /* Profile Image */
@@ -105,11 +83,6 @@
   margin-bottom: 20px;
   box-shadow: 0 0 20px rgba(0, 168, 232, 0.4);
   transition: transform 0.3s ease;
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) padding-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: destination-out;
-  mask-composite: exclude;
 }
 
 .profile-img:hover {
@@ -129,8 +102,10 @@
 .profile-card p {
   font-size: 14px;
   margin: 5px 0;
+  color: #ccc;
 }
 
+/* Hover Animation */
 @keyframes floatAnimation {
   0%, 100% { transform: translateY(0) rotate(0); }
   25% { transform: translateY(-5px) rotate(-1deg); }
@@ -140,4 +115,3 @@
 .profile-card:hover {
   animation: floatAnimation 3s ease-in-out infinite;
 }
-

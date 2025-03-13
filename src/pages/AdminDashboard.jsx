@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Outlet } from "react-router-dom";
 import SideBarad from "./SideBarad";
 import AdminProfile from "../components/AdminProfile";
@@ -8,10 +8,15 @@ function AdminDashboard() {
   const [showProfile, setShowProfile] = useState(false);
 
   const adminName = "Zoro";
-  const adminPhoto = "https://images3.alphacoders.com/134/1345517.jpeg" // Dummy avatar
+  const adminPhoto = "https://images3.alphacoders.com/134/1345517.jpeg"; // Dummy avatar
 
-  const toggleProfile = () => setShowProfile(true);
-  const closeProfile = () => setShowProfile(false);
+  const toggleProfile = useCallback(() => {
+    setShowProfile((prev) => !prev);
+  }, []);
+
+  const closeProfile = useCallback(() => {
+    setShowProfile(false);
+  }, []);
 
   // Close modal on "Esc" key press
   useEffect(() => {
@@ -21,11 +26,11 @@ function AdminDashboard() {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [closeProfile]);
 
   return (
     <div className="dashboard-container">
-      {/* SideBarad */}
+      {/* Sidebar */}
       <SideBarad />
 
       <div className="dashboard-main">
@@ -50,17 +55,15 @@ function AdminDashboard() {
           <div className="profile-modal-overlay" onClick={closeProfile}>
             <div className="profile-modal" onClick={(e) => e.stopPropagation()}>
               <span className="close-btn" onClick={closeProfile}>&times;</span>
-              <AdminProfile />
+              <AdminProfile onClose={closeProfile} />
             </div>
           </div>
         )}
 
         {/* Page Content (Only Show If Profile is Closed) */}
-        {!showProfile && (
-          <div className="dashboard-content">
-            <Outlet />
-          </div>
-        )}
+        <div className="dashboard-content">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

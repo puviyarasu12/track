@@ -13,6 +13,11 @@ function SideBarad() {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/admin/reportAnalysis">
+          <span>📊</span> Analysis
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/admin/employee-management">
             <span>👨‍💼</span> Employee Management
           </NavLink>

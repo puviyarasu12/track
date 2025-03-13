@@ -1,40 +1,40 @@
-import React, { useState, useCallback } from "react";
-import "../styles/AdminProfile.css";
+import React, { useState } from "react";
+import "../styles/EmployeeDashboard.css";
 
-function AdminProfile({ onClose }) {
-  const [profileData] = useState({
-    name: "Administrator",
-    email: "admin@trackzone.com",
-    role: "Super Admin",
-    department: "IT Management",
-    joinDate: "2023-01-01",
-    imageUrl: "https://images4.alphacoders.com/132/1327091.png"
+const AdminProfile = ({ onClose }) => {
+  const [employee] = useState({
+    name: "Zoro",
+    email: "Zoro@trackzone.com",
+    role: "Software Engineer",
+    department: "Development",
+    joinDate: "2023-06-15",
+    contactNumber: "+1234567890",
+    imageUrl: "https://images3.alphacoders.com/134/1345517.jpeg"
   });
 
-  const handleImageError = useCallback((e) => {
-    e.target.src = "https://via.placeholder.com/120x120?text=Admin";
-  }, []);
-
   return (
-    <div className="admin-profile" onClick={(e) => e.target.className === 'admin-profile' && onClose()}>
-      <div className="profile-card">
-        <span className="close-btn" onClick={onClose}>✖</span>
-        <img
-          src={profileData.imageUrl}
-          onError={handleImageError}
-          alt="Admin Profile"
-          className="profile-img"
-        />
-        <h2>{profileData.name}</h2>
-        <div className="profile-info">
-          <p><strong>Email:</strong> {profileData.email}</p>
-          <p><strong>Role:</strong> {profileData.role}</p>
-          <p><strong>Department:</strong> {profileData.department}</p>
-          <p><strong>Join Date:</strong> {profileData.joinDate}</p>
+    <div className="profile-popup">
+      <div className="profile-content">
+        <div className="profile-header">
+          <h2>Employee Profile</h2>
+          <span className="close-btn" onClick={onClose}>✖</span>
+        </div>
+        
+        <div className="profile-image">
+          <img src={employee.imageUrl} alt={employee.name} />
+        </div>
+        
+        <div className="profile-details">
+          <p><strong>Name:</strong> {employee.name}</p>
+          <p><strong>Email:</strong> {employee.email}</p>
+          <p><strong>Role:</strong> {employee.role}</p>
+          <p><strong>Department:</strong> {employee.department}</p>
+          <p><strong>Join Date:</strong> {employee.joinDate}</p>
+          <p><strong>Contact:</strong> {employee.contactNumber}</p>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default AdminProfile;

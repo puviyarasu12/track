@@ -8,7 +8,7 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token"); // Clear authentication token
-    navigate("/"); // Redirect to login page
+    navigate("/login"); // Redirect to login page
   };
 
   return (

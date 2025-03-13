@@ -8,7 +8,7 @@ function EmployeeDashboard() {
   const [showProfile, setShowProfile] = useState(false);
 
   const employeeName = "Nico Robin"; 
-  const employeePhoto = "https://i.ytimg.com/vi/jFNC27WZaL0/maxresdefault.jpg"; 
+  const employeePhoto = "https://images6.alphacoders.com/937/937800.png"; 
 
   const toggleProfile = () => setShowProfile(true);
   const closeProfile = () => setShowProfile(false);

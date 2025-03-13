@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from "react";
-import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/Login.css";
@@ -59,6 +58,7 @@ const Login = () => {
       <nav className="login-nav">
         <div className="logo">TrackZone</div>
         <div className="nav-links">
+          <Link to="/">Home</Link>
           <Link to="/help-support">Help</Link>
           <Link to="/contact">Contact</Link>
         </div>
@@ -114,12 +114,6 @@ const Login = () => {
               {loading ? "Logging in..." : "Sign in"}
             </button>
           </form>
-
-          <div className="social-login">
-            <button className="social-btn google">
-              <FcGoogle size={24} />
-            </button>
-          </div>
         </div>
       </div>
     </>

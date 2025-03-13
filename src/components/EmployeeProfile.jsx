@@ -9,7 +9,7 @@ const EmployeeProfile = ({ onClose }) => {
     department: "Development",
     joinDate: "2023-06-15",
     contactNumber: "+1234567890",
-    imageUrl: "https://i.ytimg.com/vi/jFNC27WZaL0/maxresdefault.jpg"
+    imageUrl: "https://images6.alphacoders.com/132/1327088.png"
   });
 
   return (
