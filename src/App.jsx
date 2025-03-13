@@ -8,7 +8,7 @@ const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Home = lazy(() => import("./pages/Home"));
 
-// Employee Pages
+
 const EmployeeProfile = lazy(() => import("./components/EmployeeProfile"));
 const AttendanceHistory = lazy(() => import("./components/AttendanceHistory"));
 const SalaryDetails = lazy(() => import("./components/SalaryDetails"));
