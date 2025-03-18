@@ -3,6 +3,7 @@ import "../styles/AdminDashboard.css"; // Optional styling
 
 const LeaveRequests = () => {
   const [filter, setFilter] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
   const [leaveRequests, setLeaveRequests] = useState([
     { id: 1, employee: "John Doe", type: "Sick Leave", status: "Pending" },
     { id: 2, employee: "Jane Smith", type: "Casual Leave", status: "Pending" },
@@ -18,16 +19,30 @@ const LeaveRequests = () => {
   };
 
   const filteredRequests = useMemo(() => 
-    filter === 'all' 
-      ? leaveRequests 
-      : leaveRequests.filter(req => req.status.toLowerCase() === filter)
-  , [leaveRequests, filter]);
+    leaveRequests
+      .filter(req => {
+        const matchesFilter = filter === 'all' || req.status.toLowerCase() === filter;
+        const matchesSearch = req.employee.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                            req.type.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesFilter && matchesSearch;
+      })
+  , [leaveRequests, filter, searchTerm]);
 
   return (
     <div className="leave-requests">
       <h2>Leave Requests</h2>
-      <div className="filters">
-        <select onChange={(e) => setFilter(e.target.value)}>
+      <div className="controls">
+        <input
+          type="text"
+          placeholder="Search requests..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+        <select 
+          onChange={(e) => setFilter(e.target.value)}
+          className="filter-select"
+        >
           <option value="all">All Requests</option>
           <option value="pending">Pending</option>
           <option value="approved">Approved</option>

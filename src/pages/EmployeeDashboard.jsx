@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import EmployeeProfile from "../components/EmployeeProfile";
+import Footer from "../components/Footer";
 import "../styles/EmployeeDashboard.css";
 
 function EmployeeDashboard() {
@@ -25,6 +26,17 @@ function EmployeeDashboard() {
 
   return (
     <div className="dashboard-container">
+          {/* Fixed Header */}
+          <header className="fixed-header">
+            <div className="logo">
+              <Link to="/" className="logo-text">TrackZone</Link>
+            </div>
+            <nav className="nav-links">
+              <Link to="/">Home</Link>
+              <Link to="/login">Login</Link>
+            </nav>
+          </header>
+
       {/* Sidebar */}
       <Sidebar />
 
@@ -40,7 +52,7 @@ function EmployeeDashboard() {
               alt="Profile"
               className="profile-pic"
               onClick={toggleProfile}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", width: "25px", height: "25px" }}
             />
           </div>
         </div>
@@ -59,6 +71,7 @@ function EmployeeDashboard() {
         {!showProfile && (
           <div className="dashboard-content">
             <Outlet />
+            <Footer />
           </div>
         )}
       </div>

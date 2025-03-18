@@ -1,78 +1,99 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/Sidebar.css";
 
+
 const Sidebar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(
+    localStorage.getItem("sidebarCollapsed") === "true"
+  );
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
+  // Handle sidebar collapse state
+  useEffect(() => {
+    localStorage.setItem("sidebarCollapsed", isCollapsed);
+  }, [isCollapsed]);
+
+  // Handle responsive behavior
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      if (window.innerWidth > 768) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Clear authentication token
-    navigate("/login"); // Redirect to login page
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
+  const toggleSidebar = () => {
+    if (isMobile) {
+      setIsOpen(!isOpen);
+    } else {
+      setIsCollapsed(!isCollapsed);
+    }
+  };
+
+  const menuItems = [
+    { path: "/employee", icon: "🏠", label: "Dashboard" },
+    { path: "/employee/attendance-history", icon: "📅", label: "Attendance History" },
+    { path: "/employee/salary-details", icon: "💰", label: "Salary Details" },
+    { path: "/employee/leave-management", icon: "📝", label: "Leave Management" },
+    { path: "/employee/task-board", icon: "📋", label: "Task Board" },
+    { path: "/employee/announcements", icon: "📢", label: "Announcements" },
+    { path: "/employee/change-password", icon: "🔒", label: "Change Password" },
+    { path: "/employee/notifications", icon: "🔔", label: "Notifications" },
+    { path: "/employee/help-support", icon: "❓", label: "Help & Support" },
+  ];
+
   return (
-    <nav className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
-      <div className="sidebar-header">
-        <h2 className="sidebar-title">{isCollapsed ? "EP" : "Employee Portal"}</h2>
-        <button className="toggle-btn" onClick={() => setIsCollapsed(!isCollapsed)}>
-          {isCollapsed ? "➡️" : "⬅️"}
-        </button>
-      </div>
+    <>
+      {isMobile && (
+        <div 
+          className={`sidebar-overlay ${isOpen ? "active" : ""}`} 
+          onClick={() => setIsOpen(false)}
+        />
+      )}
       
-      <ul className="sidebar-menu">
-        <li>
-          <NavLink to="/employee" className={({ isActive }) => isActive ? "active" : ""}>
-            🏠 {isCollapsed ? "" : "Dashboard"}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/employee/attendance-history" className={({ isActive }) => isActive ? "active" : ""}>
-            📅 {isCollapsed ? "" : "Attendance History"}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/employee/salary-details" className={({ isActive }) => isActive ? "active" : ""}>
-            💰 {isCollapsed ? "" : "Salary Details"}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/employee/leave-management" className={({ isActive }) => isActive ? "active" : ""}>
-            📝 {isCollapsed ? "" : "Leave Management"}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/employee/task-board" className={({ isActive }) => isActive ? "active" : ""}>
-            📋 {isCollapsed ? "" : "Task Board"}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/employee/announcements" className={({ isActive }) => isActive ? "active" : ""}>
-            📢 {isCollapsed ? "" : "Announcements"}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/employee/change-password" className={({ isActive }) => isActive ? "active" : ""}>
-            🔒 {isCollapsed ? "" : "Change Password"}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/employee/notifications" className={({ isActive }) => isActive ? "active" : ""}>
-            🔔 {isCollapsed ? "" : "Notifications"}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/employee/help-support" className={({ isActive }) => isActive ? "active" : ""}>
-            ❓ {isCollapsed ? "" : "Help & Support"}
-          </NavLink>
-        </li>
-        <li>
-          <button className="logout-btn" onClick={handleLogout}>
-            📄 {isCollapsed ? "" : "Logout"}
+      <nav className={`sidebar ${isCollapsed ? "collapsed" : ""} ${isMobile && isOpen ? "open" : ""}`}>
+        <div className="sidebar-header">
+          <h2 className="sidebar-title">
+            {isCollapsed ? "EP" : "Employee Portal"}
+          </h2>
+          <button className="toggle-btn" onClick={toggleSidebar}>
+            {isCollapsed ? "➡️" : "⬅️"}
           </button>
-        </li>
-      </ul>
-    </nav>
+        </div>
+        
+        <ul className="sidebar-menu">
+          {menuItems.map((item) => (
+            <li key={item.path}>
+              <NavLink 
+                to={item.path} 
+                className={({ isActive }) => isActive ? "active" : ""}
+              >
+                <span>{item.icon}</span>
+                {!isCollapsed && item.label}
+              </NavLink>
+            </li>
+          ))}
+          <li>
+            <button className="logout-btn" onClick={handleLogout}>
+              <span>📄</span>
+              {!isCollapsed && "Logout"}
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 /* General Styles */
 body {
     font-family: "Poppins", sans-serif;
-    background: linear-gradient(135deg, #00A8E8, #00E8A8, #00A8E8);
+    background: rgb(0, 168, 232);
     background-size: 200% 200%;
     animation: gradientMove 15s infinite;
     color: #F5F7FA;
@@ -17,47 +17,80 @@ body {
 
 /* Dashboard Layout */
 .dashboard-container {
+    min-height: 100vh;
     display: flex;
-    transition: all 0.3s ease-in-out;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 80px; /* Increased from 60px to 80px */
+    position: relative;
+    padding-bottom: 60px; /* Space for footer */
+    background: rgb(0, 168, 232);
 }
 
-/* Sidebar */
-.sidebar {
+/* Dashboard Main Content */
+.dashboard-main {
+    margin-top: 20px; /* Added margin to push content down */
+    padding: 0 20px;
+    margin-left: var(--sidebar-width); /* Use CSS variable from Sidebar.css */
+    transition: margin 0.3s ease;
+}
+
+/* When sidebar is collapsed */
+.collapsed .dashboard-main {
+    margin-left: var(--sidebar-width-collapsed);
+}
+
+/* Fixed Header */
+.fixed-header {
     position: fixed;
     top: 0;
     left: 0;
-    width: 250px;
-    height: 100vh;
-    background: #252A34;
-    padding: 20px;
-    transition: all 0.3s ease-in-out;
+    right: 0;
+    height: 60px;
+    background: rgba(37, 42, 52, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.collapsed .sidebar {
-    width: 70px;
+.logo {
+    display: flex;
+    align-items: center;
 }
 
-.sidebar a {
-    display: block;
-    padding: 12px;
+.logo-text {
     color: #F5F7FA;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background 0.3s;
+    font-size: 24px;
+    font-weight: bold;
+    transition: color 0.3s ease;
 }
 
-.sidebar a:hover {
-    background: rgba(255, 255, 255, 0.1);
+.logo-text:hover {
+    color: #00A8E8;
 }
 
-/* Sidebar Toggle Button */
-.sidebar-toggle-btn {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
     color: #F5F7FA;
-    margin-right: 20px;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #00A8E8;
 }
 
 /* Main Content */
@@ -100,10 +133,10 @@ body {
 }
 
 .profile-pic {
-    width: 50px;
-    height: 50px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
-    border: 2px solid #0077B6;
+    border: 1px solid #0077B6;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -136,6 +169,14 @@ body {
     color: white;
     animation: fadeIn 0.3s ease-in-out;
     position: relative;
+}
+
+.profile-image img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #0077B6;
+    margin-bottom: 15px;
 }
 
 /* Close Button */
@@ -185,9 +226,221 @@ button:hover {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .dashboard-container { flex-direction: column; }
-    .sidebar { width: 100%; text-align: center; }
-    .collapsed .sidebar { width: 100%; padding: 10px; }
-    .content { margin: 10px; padding: 15px; }
-    .profile-modal { width: 90%; }
+    .dashboard-container { 
+        flex-direction: column; 
+    }
+    .dashboard-main { 
+        margin-left: 0;
+        margin: 10px;
+        padding: 15px; 
+    }
+    .profile-modal { 
+        width: 90%; 
+    }
 }
+
+.leave-management {
+    width: 100%;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #000; /* Added black color for all text */
+}
+
+.leave-management h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #000; /* Changed to black */
+}
+
+.leave-management label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+    text-align: left;
+    color: #000; /* Changed to black */
+}
+
+.leave-management select,
+.leave-management input,
+.leave-management textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #000; /* Added black color for input text */
+}
+
+.leave-management textarea {
+    height: 80px;
+    resize: none;
+}
+
+.leave-management button {
+    background: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.leave-management button:hover {
+    background: #0056b3;
+}
+
+/* Task Board Styles */
+.task-board {
+    width: 450px;  /* Increased from 350px */
+    margin: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #F5F7FA;
+}
+
+.add-task {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.add-task input {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);    /* Lighter background */
+    color: #ffffff;                           /* White text */
+    font-size: 16px;
+    min-height: 45px;
+    width: 100%;
+    font-weight: 500;                         /* Make text slightly bolder */
+}
+
+.add-task input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: normal;
+}
+
+.add-task button {
+    padding: 8px 12px;
+    background: linear-gradient(45deg, rgba(40, 167, 69, 0.9), rgba(34, 139, 34, 0.9));
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px; /* Increased margin */
+    padding: 12px 16px;  /* Increased padding */
+    border-radius: 5px;
+    backdrop-filter: blur(5px);
+    font-size: 16px;    /* Added font size */
+}
+
+.task p {
+    margin: 0;
+    flex: 1;           /* Allow text to take available space */
+    padding-right: 15px; /* Space between text and controls */
+}
+
+.task.pending { 
+    background: rgba(255, 238, 186, 0.2); 
+}
+.task.in-progress { 
+    background: rgba(204, 229, 255, 0.2); 
+}
+.task.completed { 
+    background: rgba(212, 237, 218, 0.2); 
+}
+
+.controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.controls select {
+    padding: 5px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #F5F7FA;
+    min-width: 120px;  /* Ensure minimum width for dropdown */
+}
+
+.controls button {
+    background: linear-gradient(45deg, rgba(220, 53, 69, 0.9), rgba(178, 34, 34, 0.9));
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+
+.no-tasks {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Announcements Styles */
+.announcements {
+    width: 300px;
+    margin: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #F5F7FA;
+}
+
+.announcements h2 {
+    color: #F5F7FA;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.announcements-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.announcement-item {
+    padding: 12px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+.announcement-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(5px);
+}
+
+.announcement-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+

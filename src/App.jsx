@@ -77,7 +77,7 @@ const App = () => {
 
             <Route path="attendance-logs" element={<AttendanceLogs />} />
             <Route path="geofence-management" element={<GeofenceManagement />} />
-
+            <Route path="task-management" element={<TaskManagement />} />
             <Route path="payroll-management" element={<PayrollManagement />} />
             <Route path="employee-management" element={<EmployeeManagement />} />
             <Route path="notifications" element={<Notifications />} />

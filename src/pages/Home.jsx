@@ -11,7 +11,9 @@ export default function Home() {
       {/* Header with Logo and Login Button */}
       <header className="top-bar">
         <div className="logo">Trackzone</div>
-        <button className="btn-login" onClick={() => navigate("/login")}>Login</button>
+        <div className="nav-buttons">
+          <button className="btn-login" onClick={() => navigate("/login")}>Login</button>
+        </div>
       </header>
 
       {/* Hero Section */}
@@ -19,7 +21,9 @@ export default function Home() {
         <div className="hero-content">
           <h1>Smart Geo-Location Attendance System</h1>
           <p>Track employee attendance automatically with precision and efficiency.</p>
-          <button className="btn-primary" onClick={() => navigate("/login")}>Get Started</button>
+          <button className="btn-primary" onClick={() => navigate("/login")}>
+            Get Started
+          </button>
         </div>
       </section>
 
@@ -49,12 +53,25 @@ export default function Home() {
       <section className="how-it-works">
         <h2>How It Works</h2>
         <div className="steps-grid">
-          <FeatureCard icon="✅" title="Step 1" description="Employees check in using geo-location tracking." />
-          <FeatureCard icon="📊" title="Step 2" description="Attendance data is updated in real-time." />
-          <FeatureCard icon="💼" title="Step 3" description="Managers review and approve attendance logs." />
+          <FeatureCard 
+            icon="✅" 
+            title="Quick Check-in" 
+            description="Simple geo-location based attendance" 
+          />
+          <FeatureCard 
+            icon="📊" 
+            title="Real-time Updates" 
+            description="Instant attendance tracking" 
+          />
+          <FeatureCard 
+            icon="💼" 
+            title="Easy Review" 
+            description="Simplified attendance management" 
+          />
         </div>
       </section>
-      <Footer/>   </div>
+      <Footer/>
+    </div>
   );
 }
 

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/EmployeeDashboard.css";
 
 const AdminProfile = ({ onClose }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [employee] = useState({
     name: "Zoro",
     email: "Zoro@trackzone.com",
@@ -12,16 +13,30 @@ const AdminProfile = ({ onClose }) => {
     imageUrl: "https://images3.alphacoders.com/134/1345517.jpeg"
   });
 
+  useEffect(() => {
+    const img = new Image();
+    img.src = employee.imageUrl;
+    img.onload = () => setIsLoading(false);
+  }, [employee.imageUrl]);
+
   return (
-    <div className="profile-popup">
-      <div className="profile-content">
+    <div className="profile-popup" onClick={onClose}>
+      <div className="profile-content" onClick={e => e.stopPropagation()}>
         <div className="profile-header">
-          <h2>Employee Profile</h2>
+          <h2>Admin Profile</h2>
           <span className="close-btn" onClick={onClose}>✖</span>
         </div>
         
         <div className="profile-image">
-          <img src={employee.imageUrl} alt={employee.name} />
+          {isLoading ? (
+            <div className="loading-spinner">Loading...</div>
+          ) : (
+            <img 
+              src={employee.imageUrl} 
+              alt={employee.name}
+              className="profile-img"
+            />
+          )}
         </div>
         
         <div className="profile-details">

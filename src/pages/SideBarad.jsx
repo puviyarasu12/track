@@ -1,65 +1,77 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/Sidebarad.css";
 
 function SideBarad() {
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div className="sidebarad">
-      <h2>Admin Panel</h2>
+    <div className={`sidebarad ${isOpen ? 'open' : 'closed'}`}>
+      <div className="sidebar-header">
+        <button className="toggle-btn" onClick={toggleSidebar}>
+          {isOpen ? '☰' : '☰'}
+        </button>
+        {isOpen && <h2>Admin Panel</h2>}
+      </div>
       <ul>
         <li>
           <NavLink to="/admin" end>
-            <span>📊</span> Dashboard
+            <span>📊</span> {isOpen && "Dashboard"}
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/reportAnalysis">
-          <span>📊</span> Analysis
-          </NavLink>
+        <NavLink to="/admin/reportAnalysis">
+  <span>📈</span> {isOpen && "Analysis"}
+</NavLink>
+
         </li>
         <li>
           <NavLink to="/admin/employee-management">
-            <span>👨‍💼</span> Employee Management
+            <span>👨‍💼</span> {isOpen && "Employee Management"}
           </NavLink>
         </li>
         <li>
           <NavLink to="/admin/geofence-management">
-            <span>📍</span> Geofence Management
+            <span>📍</span> {isOpen && "Geofence Management"}
           </NavLink>
         </li>
         <li>
           <NavLink to="/admin/attendance-logs">
-            <span>🕒</span> Attendance Logs
+            <span>🕒</span> {isOpen && "Attendance Logs"}
           </NavLink>
         </li>
         <li>
           <NavLink to="/admin/payroll-management">
-            <span>💰</span> Payroll Management
+            <span>💰</span> {isOpen && "Payroll Management"}
           </NavLink>
         </li>
         <li>
           <NavLink to="/admin/leave-requests">
-            <span>📆</span> Leave Requests
+            <span>📆</span> {isOpen && "Leave Requests"}
           </NavLink>
         </li>
         <li>
           <NavLink to="/admin/shift-scheduling">
-            <span>⏳</span> Shift Scheduling
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/admin/reports-analytics">
-            <span>📑</span> Reports & Analytics
+            <span>⏳</span> {isOpen && "Shift Scheduling"}
           </NavLink>
         </li>
         <li>
           <NavLink to="/admin/notifications">
-            <span>🔔</span> Notifications & Alerts
+            <span>🔔</span> {isOpen && "Notifications & Alerts"}
           </NavLink>
         </li>
         <li>
           <NavLink to="/admin/settings-permissions">
-            <span>⚙️</span> Settings & Permissions
+            <span>⚙️</span> {isOpen && "Settings & Permissions"}
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/login" className="logout-link">
+            <span>🚪</span> {isOpen && "Logout"}
           </NavLink>
         </li>
       </ul>

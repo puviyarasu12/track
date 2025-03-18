@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import "../styles/AdminDashboard.css"; // Import styling
 
 const EmployeeManagement = () => {
@@ -17,6 +17,22 @@ const EmployeeManagement = () => {
   });
 
   const [editingEmployee, setEditingEmployee] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState('name');
+  const [sortOrder, setSortOrder] = useState('asc');
+
+  const sortedAndFilteredEmployees = useMemo(() => {
+    return employees
+      .filter(emp => 
+        emp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        emp.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        emp.role.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      .sort((a, b) => {
+        const order = sortOrder === 'asc' ? 1 : -1;
+        return a[sortBy] > b[sortBy] ? order : -order;
+      });
+  }, [employees, searchTerm, sortBy, sortOrder]);
 
   const handleChange = (e) => {
     setNewEmployee({ ...newEmployee, [e.target.name]: e.target.value });
@@ -61,6 +77,31 @@ const EmployeeManagement = () => {
 
   return (
     <div className="employee-management">
+      <div className="controls">
+        <input
+          type="text"
+          placeholder="Search employees..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+        <select 
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+          className="sort-select"
+          style={{ color: 'black' }}
+        >
+          <option value="name" style={{ color: 'black' }}>Name</option>
+          <option value="role" style={{ color: 'black' }}>Role</option>
+          <option value="email" style={{ color: 'black' }}>Email</option>
+        </select>
+        <button 
+          onClick={() => setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')}
+          className="sort-order-btn"
+        >
+          {sortOrder === 'asc' ? '↑' : '↓'}
+        </button>
+      </div>
       <h2>Employee Management</h2>
 
       {/* Employee Table */}
@@ -75,7 +116,7 @@ const EmployeeManagement = () => {
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee) => (
+          {sortedAndFilteredEmployees.map((employee) => (
             <tr key={employee.id}>
               <td>
                 {employee.profilePic ? (

@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/Login.css";
+import Footer from "../components/Footer";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -17,7 +18,7 @@ const Login = () => {
     if (!username) newErrors.username = "Username is required";
     if (!password) newErrors.password = "Password is required";
     if (password.length < 6) newErrors.password = "Password must be at least 6 characters";
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   }, [username, password]);
@@ -25,14 +26,13 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    
+
     setLoading(true);
     setError("");
-    
+
     try {
-      // Simulated API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       let userRole = null;
       if (username === "admin" && password === "admin123") {
         userRole = "admin";
@@ -54,7 +54,11 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className="login-wrapper" style={{
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
       <nav className="login-nav">
         <div className="logo">TrackZone</div>
         <div className="nav-links">
@@ -63,9 +67,15 @@ const Login = () => {
           <Link to="/contact">Contact</Link>
         </div>
       </nav>
-      <div className="login-container">
+      <div className="login-container" style={{
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem'
+      }}>
         <div className="login-card">
-          <h2>Welcome back</h2>
+          <h2 style={{ color: '#2563eb' }}>Welcome back</h2>
           <p>Please enter your account details</p>
 
           {error && <div className="error-message">{error}</div>}
@@ -116,7 +126,8 @@ const Login = () => {
           </form>
         </div>
       </div>
-    </>
+      <Footer />
+    </div>
   );
 };
 
